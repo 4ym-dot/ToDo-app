@@ -1,8 +1,3 @@
-/**
- * RPG Habits Quest
- * 機能：クエスト追加・削除機能付き
- */
-
 // ==========================================
 //  1. 設定値と状態管理
 // ==========================================
@@ -15,15 +10,13 @@ const GAME_CONFIG = {
 // 現在選択中のクエスト難易度（初期値: 30）
 let currentSelectedXP = 30;
 
-
-
 let gameState = {
     xp: 0,
     level: 1,
     neededXp: 100
 };
 
-// ★クエストのリスト（初期値は空っぽだが、初回起動時にデフォルトを入れる）
+// クエストのリスト（初期値は空っぽだが、初回起動時にデフォルトを入れる）
 let questList = [];
 
 // ==========================================
@@ -39,8 +32,8 @@ const ui = {
     levelText: document.getElementById('level-display'),
     xpNeededText: document.getElementById('xp-needed'),
     modal: document.getElementById('login-modal'),
-    questGrid: document.getElementById('quest-grid'), // 追加
-    input: document.getElementById('new-quest-input') // 追加
+    questGrid: document.getElementById('quest-grid'),
+    input: document.getElementById('new-quest-input')
 };
 
 // ==========================================
@@ -77,7 +70,7 @@ function addNewQuest() {
 
     // 新しいクエストデータを作る
     const newQuest = {
-        id: Date.now(), // 現在時刻をIDにする（被らない）
+        id: Date.now(),
         title: text,
         emoji: getRandomEmoji(), // ランダムで絵文字を決める
         xp: currentSelectedXP
@@ -139,7 +132,7 @@ function loadData() {
 
     gameState.neededXp = calculateNextXP();
     updateScreen();
-    renderQuests(); // ★リストを表示
+    renderQuests(); // リストを表示
 }
 
 function resetData() {
@@ -161,7 +154,7 @@ function updateScreen() {
 }
 
 
-// ★クエスト一覧を画面に描画する（一番大事な関数）
+// クエスト一覧を画面に描画する（一番大事な関数）
 function renderQuests() {
     ui.questGrid.innerHTML = ""; // 一回全部消す
 
@@ -284,4 +277,5 @@ document.addEventListener('DOMContentLoaded', () => {
     loadData();
     loadTheme(); // テーマを復元
     checkLoginBonus();
+
 });

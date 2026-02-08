@@ -1,0 +1,410 @@
+/* 右上のリセットボタン用 */
+.reset-btn {
+    position: absolute; 
+    top: 20px; 
+    right: 20px; 
+    background: rgb(209, 209, 209); 
+    border: none; 
+    font-size: 20px; 
+    cursor: pointer; 
+    z-index: 2000;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.xp-remain-text {
+    text-align: right; font-size: 12px; color: var(--text-sub); margin-top: 4px;
+}
+
+/* ========== 全体の基本設定 ========== */
+body {
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    background: var(--bg-gradient);
+    background-attachment: fixed; /* スクロールしても背景を固定 */
+    background-size: 400% 400%; /* 背景を拡大して、その一部を表示する */
+    animation: gradientBG 15s ease infinite; /* 15秒かけてゆっくり動かす */
+    color: var(--text-main);
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    touch-action: manipulation; 
+}
+
+/* ========== 背景アニメーションの動き ========== */
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%; /* 右へ移動 */
+    }
+    100% {
+        background-position: 0% 50%;   /* 左へ戻る */
+    }
+}
+
+:root {
+    /* ライトモードの色 */
+    --bg-gradient: linear-gradient(-45deg, #a18cd1, #fbc2eb, #8fd3f4, #a4fdab);
+    --phone-bg: rgba(255, 255, 255, 1);
+    --card-bg: #f5f5f5d9;
+    --text-main: #1c1c1e;
+    --text-sub: #8e8e93;
+    --item-bg: #e5e5ea;
+    --theme-btn-bg: #1c1c1e; 
+    --theme-btn-text: #ffffff;
+}
+
+body.dark-mode {
+    --bg-gradient: linear-gradient(-45deg, #0c0925, #0a0147, #010131, #060416);
+    --phone-bg: rgba(28, 28, 30, 1);
+    --card-bg: rgba(44, 44, 46, 1);
+    --text-main: #ffffff;
+    --text-sub: #aeaeb2;
+    --item-bg: #3a3a3c;
+    --theme-btn-bg: #ffffff;
+}
+
+.theme-toggle-btn {
+    position: absolute; top: 20px; left: 20px; /* 左上 */
+    background-color: var(--theme-btn-bg);
+    color: var(--theme-btn-text);
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 2000;
+    width: 40px; height: 40px; border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 1);
+    display: flex; justify-content: center; align-items: center;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle-btn:active {
+    transform: scale(0.9);
+}
+
+    /* アプリ画面のコンテナ（PCでの見た目） */
+.phone-screen {
+    width: 100%;
+    max-width: 1000px; /* PCでは広がりすぎないように制限 */
+    /* 白色の半透明（85%） */
+    background-color: var(--phone-bg);
+    
+    /* 背景をぼかす（すりガラス効果） */
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px); /* Safari用 */
+    padding: 20px;
+    box-sizing: border-box;
+
+    /* PCで見るときは「浮いているカード」のように見せる */
+    margin: 20px 0; 
+    border-radius: 40px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+    position: relative; /* 子要素の配置基準 */
+    min-height: 800px; /* 最低限の高さを確保 */
+}
+
+    /* ========== ★レスポンシブ対応（スマホ用） ========== */
+    @media (max-width: 480px) {
+        body {
+            background-color: var(--phone-bg); /* 背景色を統一 */
+        }
+        .phone-screen {
+            max-width: 100%; /* 横幅制限を解除 */
+            margin: 0;       /* 外側の余白をなくす */
+            border-radius: 0;/* 角丸をなくす */
+            box-shadow: none;/* 影をなくす */
+            min-height: 100vh; /* 画面の高さいっぱいに */
+        }
+    }
+
+    /* ========== 以下、コンテンツのデザイン ========== */
+    h1, h2 {
+        text-align: center;
+        color: var(--text-main);
+        font-weight: 700;
+        margin-top: 10px;
+    }
+
+    /* ステータスカード */
+    .status-card {
+        background: var(--card-bg);
+        color: var(--text-main);
+        border-radius: 20px;
+        padding: 24px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+        margin-bottom: 30px;
+    }
+
+    .level-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        margin-bottom: 12px;
+    }
+
+    .level-text { font-size: 14px; color: var(--text-sub); font-weight: 600; }
+    .level-number { font-size: 36px; font-weight: 800; color: #007aff; }
+
+    .xp-bar-container {
+        width: 100%; height: 14px;
+        background-color: #efeff4;
+        border-radius: 7px; overflow: hidden;
+    }
+
+    .xp-bar-fill {
+        width: 0%; height: 100%;
+        background: linear-gradient(90deg, #32ade6, #007aff);
+        border-radius: 7px;
+        transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        will-change: width;
+    }
+
+    /* クエスト一覧 */
+    .quest-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+        padding-bottom: 100px; /* 下部に余白（スクロール用） */
+    }
+
+    .quest-icon {
+        background: var(--card-bg);
+        color: var(--text-main);
+        border-radius: 24px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+        padding: 24px 16px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+        position: relative;
+        /* overflow: hidden; */
+    }
+
+    /* PCでマウスを乗せた時だけ浮かす */
+    @media (hover: hover) {
+        .quest-icon:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+        }
+    }
+
+    .quest-icon:active {
+        transform: scale(0.94);
+        background-color: #f2f2f7;
+    }
+
+    .emoji { font-size: 42px; display: block; margin-bottom: 12px; }
+
+    .quest-title { font-size: 14px; font-weight: 700; color: var(--text-main);
+    word-break: break-word; /* 長い単語を折り返す */
+    display: block;
+    }
+
+    /* ========== ポップアップ類 ========== */
+    .modal-overlay {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background-color: rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(8px); /* すりガラス効果 */
+        display: flex; justify-content: center; align-items: center;
+        z-index: 9999;
+        opacity: 0; visibility: hidden;
+        transition: opacity 0.3s ease;
+    }
+
+    .modal-overlay.active { opacity: 1; visibility: visible; }
+
+    .bonus-card {
+        background: var(--card-bg);
+        color: var(--text-main);
+        width: 85%; max-width: 320px;
+        padding: 40px 24px;
+        border-radius: 30px;
+        text-align: center;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        transform: scale(0.8);
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .modal-overlay.active .bonus-card { transform: scale(1); }
+
+    .bonus-emoji { font-size: 64px; margin-bottom: 16px; display: block; animation: bounce 1.2s infinite; }
+    .bonus-title { font-size: 22px; font-weight: 800; margin-bottom: 8px; color: var(--text-main); }
+    .bonus-text { font-size: 15px; color: var(--text-sub); margin-bottom: 28px; line-height: 1.5; }
+
+    .get-button {
+        background: #007aff; color: white; border: none;
+        padding: 16px 0; font-size: 17px; font-weight: 700;
+        border-radius: 100px; cursor: pointer; width: 100%;
+        box-shadow: 0 4px 12px rgba(0,122,255,0.3);
+    }
+
+    .get-button:active { transform: scale(0.96); opacity: 0.9; }
+
+    @keyframes bounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-12px); }
+    }
+
+    /* ========== 新規追加：クエスト追加フォーム ========== */
+.add-quest-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+#new-quest-input {
+    flex: 1; /* 横幅いっぱい使う */
+    min-width: 100px; /* 最低限の幅 */
+    padding: 12px 16px;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    font-size: 16px;
+    background: var(--item-bg);
+    color: var(--text-main);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    outline: none;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.add-btn {
+    background: #34c759; /* 緑色 */
+    color: white;
+    border: none;
+    width: 44px;
+    border-radius: 12px;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(52, 199, 89, 0.3);
+}
+.add-btn:active { transform: scale(0.95); }
+
+/* ========== 編集ボタン（－）のデザイン ========== */
+.edit-btn {
+    background: #ff3b30;
+    color: white;
+    border: none;
+    width: 44px;
+    border-radius: 12px;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+.edit-btn:active { background: #d1d1d6; }
+
+/* ========== 削除ボタン ========== */
+.delete-btn {
+    /* 位置や見た目の設定 */
+    position: absolute;
+    top: -8px; right: -8px;
+    width: 36px; height: 36px;
+    background: #ff3b30; color: white;
+    border: 3px solid #f2f2f7; border-radius: 50%;
+    font-size: 18px; font-weight: bold;
+    display: flex; justify-content: center; align-items: center;
+    z-index: 10;
+    
+    /* 普段は隠しておく */
+    opacity: 0;             /* 透明にする */
+    pointer-events: none;   /* クリックできないようにする */
+    transform: scale(0.5);  /* 少し小さくしておく（出現アニメーション用） */
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* ボヨヨンと出る動き */
+}
+
+/* 「編集モード」の時だけ削除ボタンを表示 */
+.quest-grid.editing-mode .delete-btn {
+    opacity: 1;             /* 見えるように */
+    pointer-events: auto;   /* クリックできるように */
+    transform: scale(1);    /* 元の大きさに */
+    animation: wobble 0.3s ease-in-out; /* 出現時に少し揺らす */
+}
+
+/* 出現時の揺れアニメーション */
+@keyframes wobble {
+    0% { transform: scale(0.5) rotate(0deg); }
+    40% { transform: scale(1.1) rotate(-5deg); }
+    80% { transform: scale(1) rotate(3deg); }
+    100% { transform: scale(1) rotate(0deg); }
+}
+
+/* 編集モード中はアイコン自体もプルプル震える */
+.quest-grid.editing-mode .quest-icon {
+    animation: shake 0.3s infinite;
+    cursor: default;
+}
+
+@keyframes shake {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(0.7deg); }
+    75% { transform: rotate(-0.7deg); }
+    100% { transform: rotate(0deg); }
+}
+
+/* ========== 難易度スイッチ（スライド式） ========== */
+.difficulty-switch {
+    position: relative; /* 子要素の基準位置 */
+    display: flex;
+    background-color: var(--item-bg);
+    border-radius: 10px;
+    padding: 3px;
+    width: 120px; /* 全体の幅 */
+    height: 36px; /* 高さ */
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1); /* 内側に影を入れて凹ませる */
+}
+
+/* 動く白い板（ハイライト） */
+.diff-highlight {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 36px; /* ボタン1個分の幅（(120 - 6) / 3 ≒ 38 だが余白調整） */
+    width: calc((100% - 6px) / 3); /* 正確に3等分 */
+    height: 35px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+    z-index: 1; /* 文字の後ろ、グレー背景の前 */
+    
+    /* ★滑らかな動きの正体 */
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* 各ボタン（E, N, Hの文字） */
+.diff-btn {
+    flex: 1; /* 均等に並べる */
+    border: none;
+    background: transparent; /* 透明にする */
+    font-size: 12px;
+    font-weight: bold;
+    color: #8e8e93; /* 非選択時は薄いグレー */
+    cursor: pointer;
+    z-index: 2; /* 白い板より手前に表示 */
+    transition: color 0.3s;
+    padding: 0;
+}
+
+/* 選択されている文字の色 */
+.diff-btn.active {
+    color: #007aff; /* 青色 */
+}
+
+/* ========== クエストの難易度（星） ========== */
+.quest-stars {
+    display: block;      /* 改行して下に表示 */
+    margin-top: 6px;     /* タイトルとの隙間 */
+    font-size: 14px;     /* 星の大きさ */
+    color: #ffcc00;      /* 黄金色 */
+    letter-spacing: 2px; /* 星と星の間隔を少し空ける */
+    
+    /* 文字の輪郭に影をつけて、くっきりさせる */
+    text-shadow: 0 1px 2px rgba(0,0,0,0.15);
+}

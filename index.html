@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <meta name="description" content="成長可視化型ToDoアプリで、レベルアップやクエスト達成でモチベーションを維持しよう。">
+    <link rel="icon" href="images/image.png">
+    <title>成長可視化型 ToDoアプリ 千葉 渉夢</title>
+</head>
+
+<body>
+    <button onclick="toggleDarkMode()" id="dark-mode-btn" title="テーマ切替" class="theme-toggle-btn">🌑</button>
+    <button onclick="resetData()" title="データをリセット" class="reset-btn">🗑️</button>
+    <div class="phone-screen">
+        <div class="status-card">
+            <div class="level-info">
+                <span class="level-text">現在のレベル</span>
+                <span class="level-number">Lv.<span id="level-display">1</span></span>
+            </div>
+            <div class="xp-bar-container">
+                <div id="xp-bar-fill" class="xp-bar-fill"></div>
+            </div>
+            <div class="xp-remain-text">
+                あと <span id="xp-needed">100</span> XP
+            </div>
+        </div>
+
+        <h2>タスク一覧</h2>
+
+        <div class="add-quest-container">
+            <div class="difficulty-switch">
+                <div id="diff-highlight" class="diff-highlight"></div>
+
+                <button class="diff-btn active" onclick="selectDifficulty(10, 0, this)">Easy</button>
+                <button class="diff-btn" onclick="selectDifficulty(30, 1, this)">Normal</button>
+                <button class="diff-btn" onclick="selectDifficulty(50, 2, this)">Hard</button>
+            </div>
+
+            <input type="text" id="new-quest-input" placeholder="新しいタスクを入力..." maxlength="10">
+            <button onclick="addNewQuest()" class="add-btn">+</button>
+            <button onclick="toggleEditMode()" class="edit-btn">-</button>
+        </div>
+
+        <div id="quest-grid" class="quest-grid">
+        </div>
+    </div>
+
+    <div id="login-modal" class="modal-overlay">
+        <div class="bonus-card">
+            <span class="bonus-emoji">🎁</span>
+            <div class="bonus-title">ログインボーナス</div>
+            <div class="bonus-text">ログインありがとう！<br>経験値をプレゼント！</div>
+            <button class="get-button" onclick="claimBonus()">
+                50 XP を受け取る
+            </button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

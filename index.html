@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,8 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <meta name="description" content="成長可視化型ToDoアプリで、レベルアップやクエスト達成でモチベーションを維持しよう。">
     <link rel="icon" href="images/image.png">
@@ -16,6 +18,7 @@
 
 <body>
     <button onclick="toggleDarkMode()" id="dark-mode-btn" title="テーマ切替" class="theme-toggle-btn">🌑</button>
+    <button onclick="toggleMute()" id="mute-btn" title="効果音ON/OFF" class="mute-btn">🔊</button>
     <button onclick="resetData()" title="データをリセット" class="reset-btn">🗑️</button>
     <div class="phone-screen">
         <div class="status-card">
@@ -64,4 +67,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>
